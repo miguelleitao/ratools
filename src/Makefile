@@ -114,11 +114,11 @@ bash-completion:     \
 
 install:		\
 	ractl           \
-        rad             \
-        bash-completion
-        install -p $(BINDIR)/rad        /usr/sbin/
-        install -p $(BINDIR)/ractl      /usr/bin/
-        install -p $(BASHDIR)/ractl.sh  /etc/bash_completion.d/
+	rad             \
+	bash-completion
+	install -p $(BINDIR)/rad        /usr/sbin/
+	install -p $(BINDIR)/ractl      /usr/bin/
+	install -p $(BASHDIR)/ractl.sh  /etc/bash_completion.d/
 
 install-sysv:		\
 	install
