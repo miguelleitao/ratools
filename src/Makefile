@@ -112,13 +112,20 @@ bash-completion:     \
 
 # --- install targets ------------------------------------------------------- #
 
-install-debian:     \
+install:		\
 	ractl           \
-	rad             \
-	bash-completion
-	install -p $(BINDIR)/rad        /usr/sbin/
-	install -p $(BINDIR)/ractl      /usr/bin/
-	install -p $(BASHDIR)/ractl.sh  /etc/bash_completion.d/
+        rad             \
+        bash-completion
+        install -p $(BINDIR)/rad        /usr/sbin/
+        install -p $(BINDIR)/ractl      /usr/bin/
+        install -p $(BASHDIR)/ractl.sh  /etc/bash_completion.d/
+
+install-sysv:		\
+	install
+	install -p ../systemv/rad	/etc/init.d/
+
+install-debian:     	\
+	install         \
 	# TODO install man pages
 	# eventually, this whole target will be deletec and we will have a
 	# nice debian package...
