@@ -339,6 +339,7 @@ int rat_lib_6addr_ok (struct in6_addr *addr)
     if (!addr)
         goto exit_err;
 
+    *buf = 0;
     if (inet_pton(AF_INET6, buf, addr) == 0)
         return 1;
 
@@ -460,7 +461,7 @@ int rat_lib_bytes_to_str (char *buf, size_t buflen, uint64_t bytes)
 {
     unsigned int i = 0;
     double dbytes;
-    const char const *sfx[] = {
+    const char *sfx[] = {
         "Bytes", "KiB", "MiB", "GiB", "TiB", "PiB", "EiB", "ZiB", "YiB"
     };
 

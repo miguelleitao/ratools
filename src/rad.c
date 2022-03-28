@@ -247,7 +247,7 @@ struct rat_db_opt *rat_db_add_opt (struct rat_db *db, uint16_t mid,
 
     if (db->db_opt) {
         for (cur = db->db_opt; cur->opt_next; cur = cur->opt_next);
-            cur->opt_next = opt;
+        cur->opt_next = opt;
     } else {
         db->db_opt = opt;
     }

@@ -8,7 +8,7 @@
 
 CC           = gcc
 
-CFLAGS       = -O2 -std=gnu99 -pedantic -Wall -Wextra -pthread
+CFLAGS       = -O2 -std=gnu99 -pedantic -Wall -Wextra -Wformat-truncation=0 -pthread
 CFLAGS      += $(shell echo $$CFLAGS)
 
 LDFLAGS      = $(shell echo $$LDFLAGS)
