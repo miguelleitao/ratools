@@ -16,7 +16,7 @@
 
 RETVAL=0
 PROG="rad"
-cmd=/sbin/rad
+cmd=/usr/sbin/rad
 LOCK_FILE=/var/lock/rad
 #WATCH_OPTS="--loglevel info"
 
@@ -27,7 +27,7 @@ case "$1" in
 	start_daemon $cmd $WATCH_OPTS &
 	sleep 1
 	if [ -f /etc/rad.conf ]; then
-	     /bin/ractl < /etc/rad.conf
+	     /usr/bin/ractl < /etc/rad.conf
 	fi
 	RETVAL=$?
 	[ $RETVAL -eq 0 ] && touch $LOCK_FILE
