@@ -24,7 +24,9 @@ LOCK_FILE=/var/lock/rad
 case "$1" in
   start)
 	log_daemon_msg "Starting $PROG" "$PROG"
-	start_daemon $cmd $WATCH_OPTS &
+	ls -l /var/run/ratools/
+	#start_daemon $cmd $WATCH_OPTS &
+	/usr/sbin/rad &
 	sleep 5
 	if [ -f /etc/rad.conf ]; then
 	     /usr/bin/ractl < /etc/rad.conf
