@@ -123,7 +123,7 @@ install:		\
 install-sysv:		\
 	install
 	install -p ../systemv/rad	/etc/init.d/
-	install -p --mode=644 ../example.conf /etc/rad.conf
+	install -p --mode=644 -c ../example.conf /etc/rad.conf
 
 install-debian:     	\
 	install         \
