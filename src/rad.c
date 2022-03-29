@@ -3350,6 +3350,15 @@ int main (int argc, char *argv[])
         goto exit_err_rsra_sd;
     }
 
+    int reuse = 1;
+    if (setsockopt(rat_rad_ctlsrv_sd, SOL_SOCKET, SO_REUSEADDR, (const char*)&reuse, sizeof(reuse)) < 0)
+        perror("setsockopt(SO_REUSEADDR) failed");
+
+#ifdef SO_REUSEPORT
+    if (setsockopt(rat_rad_ctlsrv_sd, SOL_SOCKET, SO_REUSEPORT, (const char*)&reuse, sizeof(reuse)) < 0) 
+        perror("setsockopt(SO_REUSEPORT) failed");
+#endif
+
     /* bind socket */
     slen = sizeof(srvsa.sun_family) + strlen(srvsa.sun_path);
     
