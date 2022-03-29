@@ -18,26 +18,21 @@ RETVAL=0
 PROG="rad"
 cmd=/usr/sbin/rad
 LOCK_FILE=/var/lock/rad
-#WATCH_OPTS="--loglevel info"
+WATCH_OPTS="--loglevel info"
 
 
 case "$1" in
   start)
 	log_daemon_msg "Starting $PROG" "$PROG"
 	mkdir -p /var/run/ratools
-	ls -l /var/run/ratools/
 	#start_daemon $cmd $WATCH_OPTS &
-	echo "vai arrancar"
-	/usr/sbin/rad --loglevel info &
-	sleep 5
-	ps
-	ls -l /var/run/ratools/
+	/usr/sbin/rad WATCH_OPTS >/var/log/rad.log &
+	sleep 1
 	if [ -f /etc/rad.conf ]; then
-	     echo "Configuring"
+	     echo "Configuring $PROG"
 	     /usr/bin/ractl < /etc/rad.conf
 	fi
 	RETVAL=$?
-	ls -l /var/run/ratools/
 	[ $RETVAL -eq 0 ] && touch $LOCK_FILE
 	log_end_msg $RETVAL
 	;;
