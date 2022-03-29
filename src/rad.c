@@ -3345,10 +3345,15 @@ int main (int argc, char *argv[])
 
     /* bind socket */
     slen = sizeof(srvsa.sun_family) + strlen(srvsa.sun_path);
-    if (bind(rat_rad_ctlsrv_sd, (struct sockaddr *) &srvsa, slen) < 0) {
+    
+    int retry = 0;
+    while (bind(rat_rad_ctlsrv_sd, (struct sockaddr *) &srvsa, slen) < 0) {
         rat_log_err("Could not bind to socket `%s': %s!",
                     srvsa.sun_path, strerror(errno));
-        goto exit_err_ctlsrv_sd;
+        retry += 1;
+        if ( retry>3 ) 
+            goto exit_err_ctlsrv_sd;
+        sleep(1);
     }
 
 
