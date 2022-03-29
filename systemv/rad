@@ -24,14 +24,18 @@ LOCK_FILE=/var/lock/rad
 case "$1" in
   start)
 	log_daemon_msg "Starting $PROG" "$PROG"
+	mkdir -p /var/run/ratools
 	ls -l /var/run/ratools/
 	#start_daemon $cmd $WATCH_OPTS &
 	/usr/sbin/rad &
 	sleep 5
+	ls -l /var/run/ratools/
 	if [ -f /etc/rad.conf ]; then
+	     echo "Configuring"
 	     /usr/bin/ractl < /etc/rad.conf
 	fi
 	RETVAL=$?
+	ls -l /var/run/ratools/
 	[ $RETVAL -eq 0 ] && touch $LOCK_FILE
 	log_end_msg $RETVAL
 	;;
