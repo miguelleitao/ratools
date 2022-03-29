@@ -3208,7 +3208,7 @@ int main (int argc, char *argv[])
     /* control request handling */
     struct rat_ctl_request crq;
     int ret;
-    int deamon_mode = 0;
+    int daemon_mode = 0;
     RAT_DEBUG_TRACE();
 
     /* version information */
@@ -3236,7 +3236,8 @@ int main (int argc, char *argv[])
                 sockaddr = optarg;
                 break;
             case 'd':
-                deamon_mode = 1;
+                daemon_mode = 1;
+                break;
             case 'l':
                 if (strcmp(optarg, "info") == 0) {
                     rat_log_set_level(RAT_LOG_INFO);
