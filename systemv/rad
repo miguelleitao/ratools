@@ -25,7 +25,7 @@ case "$1" in
   start)
 	log_daemon_msg "Starting $PROG" "$PROG"
 	start_daemon $cmd $WATCH_OPTS &
-	sleep 1
+	sleep 5
 	if [ -f /etc/rad.conf ]; then
 	     /usr/bin/ractl < /etc/rad.conf
 	fi
