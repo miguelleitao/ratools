@@ -27,8 +27,10 @@ case "$1" in
 	mkdir -p /var/run/ratools
 	ls -l /var/run/ratools/
 	#start_daemon $cmd $WATCH_OPTS &
-	/usr/sbin/rad &
+	echo "vai arrancar"
+	/usr/sbin/rad --loglevel info &
 	sleep 5
+	ps
 	ls -l /var/run/ratools/
 	if [ -f /etc/rad.conf ]; then
 	     echo "Configuring"
