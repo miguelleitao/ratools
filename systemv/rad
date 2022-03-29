@@ -35,7 +35,7 @@ case "$1" in
 	;;
   stop)
 	log_daemon_msg "Shutting down $PROG" "$PROG"
-	killall -w $cmd
+	killall -w -s SIGINT $cmd
 	RETVAL=$?
 	[ $RETVAL -eq 0 ] && rm -f $LOCK_FILE
 	log_end_msg $RETVAL

@@ -3350,10 +3350,11 @@ int main (int argc, char *argv[])
         goto exit_err_rsra_sd;
     }
 
+#ifdef SO_REUSEADDR
     int reuse = 1;
     if (setsockopt(rat_rad_ctlsrv_sd, SOL_SOCKET, SO_REUSEADDR, (const char*)&reuse, sizeof(reuse)) < 0)
         perror("setsockopt(SO_REUSEADDR) failed");
-
+#endif
 #ifdef SO_REUSEPORT
     if (setsockopt(rat_rad_ctlsrv_sd, SOL_SOCKET, SO_REUSEPORT, (const char*)&reuse, sizeof(reuse)) < 0) 
         perror("setsockopt(SO_REUSEPORT) failed");
@@ -3367,9 +3368,9 @@ int main (int argc, char *argv[])
         rat_log_err("Could not bind to socket `%s': %s!",
                     srvsa.sun_path, strerror(errno));
         retry += 1;
-        if ( retry>3 ) 
+        if ( retry>2 ) 
             goto exit_err_ctlsrv_sd;
-        sleep(1);
+        sleep(0.2);
     }
 
 
