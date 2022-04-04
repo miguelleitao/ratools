@@ -25,6 +25,7 @@ case "$1" in
   start)
 	log_daemon_msg "Starting $PROG" "$PROG"
 	mkdir -p /var/run/ratools
+	mkdir -p /var/run/rad
 	#start_daemon $cmd $WATCH_OPTS &
 	/usr/sbin/rad WATCH_OPTS >/var/log/rad.log &
 	sleep 1
