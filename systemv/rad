@@ -20,6 +20,7 @@ cmd=/usr/sbin/rad
 LOCK_FILE=/var/lock/rad
 WATCH_OPTS="--loglevel info"
 PID_FILE=/var/run/${PROG}/${PROG}.pid
+LOG_FILE=/var/log/rad.log
 
 case "$1" in
   start)
@@ -27,7 +28,7 @@ case "$1" in
 	mkdir -p /var/run/ratools
 	mkdir -p /var/run/rad
 	#start_daemon $cmd $WATCH_OPTS &
-	/usr/sbin/rad WATCH_OPTS >/var/log/rad.log &
+	/usr/sbin/rad $WATCH_OPTS >${LOG_FILE} 2>&1 &
 	pid=$!
 	sleep 1
 	if [ -f /etc/rad.conf ]; then
